@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 
 const { mongodbConfig } = require("../db/mongodb.config");
 
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 5000;
 // middlewares
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(cookieParser());
 
 // routers
 app.use("/api/auth", require("./routes/auth.route"));
