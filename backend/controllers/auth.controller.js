@@ -68,7 +68,13 @@ const signIn = async (req, res) => {
   }
 };
 const signOut = (req, res) => {
-  res.send("this is signOut Page");
+  try {
+    res.cookie("jwtToken", "", { maxAge: 0 });
+    res.status(200).json({ message: "Signout successfully" });
+  } catch (error) {
+    console.log("Error in signout controller", error.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 module.exports = { signUp, signIn, signOut };
