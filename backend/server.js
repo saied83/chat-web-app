@@ -18,6 +18,7 @@ app.use(morgan("dev"));
 
 // routers
 app.use("/api/auth", require("./routes/auth.route"));
+app.use("/api/messages", require("./routes/message.route"));
 
 // listen
 app.listen(PORT, () => {
