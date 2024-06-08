@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const generateTokenAndSetCookie = (userId, res) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {

@@ -21,6 +21,7 @@ app.use(cookieParser());
 // routers
 app.use("/api/auth", require("./routes/auth.route"));
 app.use("/api/messages", require("./routes/message.route"));
+app.use("/api/users", require("./routes/user.route"));
 
 // listen
 app.listen(PORT, () => {
