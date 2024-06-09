@@ -3,8 +3,7 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
-
-const { mongodbConfig } = require("../db/mongodb.config");
+const { mongodbConfig } = require("./db/mongodb.config");
 
 // config
 dotenv.config();
