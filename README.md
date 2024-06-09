@@ -5,7 +5,7 @@
 A user can signup, and can start messaging all users who are using this web app
 _Other features will be updated later_
 
-> ### Technologies that are used on Backend -
+### Technologies that are used on Backend -
 
 1.  Node.js
 2.  Express.js
@@ -17,9 +17,10 @@ _Other features will be updated later_
 8.  jsonwebtoken
 9.  mongoose
 
-> ### Technologies that are used on FrontEnd -
+### Technologies that are used on FrontEnd -
 
 1.  Vite-React
 2.  TailwindCSS
-3.  Daisy UI
+3.  react-router-dom
 4.  React-Icons
+5.  Daisy UI
