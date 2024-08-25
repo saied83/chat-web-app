@@ -8,6 +8,11 @@ const useLogin = () => {
 
   const login = async ({ username, password }) => {
     setLoading(true);
+    const success = handleInputErrors({
+      username,
+      password,
+    });
+    if (!success) return;
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -29,4 +34,12 @@ const useLogin = () => {
   return { loading, login };
 };
 
+const handleInputErrors = ({ username, password }) => {
+  if (!username || !password) {
+    toast.error("Please fill all the fields");
+    return false;
+  }
+
+  return true;
+};
 export default useLogin;
