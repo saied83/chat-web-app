@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import GenderCheck from "./GenderCheck";
 import { useState } from "react";
+import useSignup from "../../hooks/useSignup";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -10,9 +11,15 @@ const SignUp = () => {
     confirmPassword: "",
     gender: "",
   });
-  const handleSubmit = (e) => {
+
+  const { loading, signup } = useSignup();
+
+  const handleGender = (gender) => {
+    setInputs({ ...inputs, gender });
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
+    await signup(inputs);
   };
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -33,7 +40,7 @@ const SignUp = () => {
             </label>
             <input
               type="text"
-              placeholder="Jhon Doe"
+              placeholder="Enter fullname"
               className="input input-bordered input-info w-full h-10 max-w-xs
               "
               value={inputs.fullName}
@@ -47,7 +54,7 @@ const SignUp = () => {
               </label>
               <input
                 type="text"
-                placeholder="jhondoe39"
+                placeholder="Enter username"
                 className="input input-bordered input-info w-full h-10 max-w-xs"
                 value={inputs.username}
                 onChange={(e) =>
@@ -83,7 +90,10 @@ const SignUp = () => {
                 }
               />
             </div>
-            <GenderCheck></GenderCheck>
+            <GenderCheck
+              handleGender={handleGender}
+              selectedGender={inputs.gender}
+            ></GenderCheck>
 
             <Link
               to={"/login"}
