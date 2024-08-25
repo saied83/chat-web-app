@@ -1,12 +1,11 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const colors = require("colors");
-const morgan = require("morgan");
-const cookieParser = require("cookie-parser");
-const { mongodbConfig } = require("./db/mongodb.config");
-
-// config
-dotenv.config();
+import express from "express";
+import colors from "colors";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import mongodbConfig from "./db/mongodb.config.js";
+import authRoute from "./routes/auth.route.js";
+import messageRoute from "./routes/message.route.js";
+import userRoute from "./routes/user.route.js";
 
 // rest object
 const app = express();
@@ -18,9 +17,9 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 
 // routers
-app.use("/api/auth", require("./routes/auth.route"));
-app.use("/api/messages", require("./routes/message.route"));
-app.use("/api/users", require("./routes/user.route"));
+app.use("/api/auth", authRoute);
+app.use("/api/messages", messageRoute);
+app.use("/api/users", userRoute);
 
 // listen
 app.listen(PORT, () => {

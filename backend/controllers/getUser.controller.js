@@ -1,7 +1,6 @@
-const express = require("express");
-const { User } = require("../models/user.model");
+import User from "../models/user.model.js";
 
-const getUser = async (req, res) => {
+export const getUser = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
     const fillerUser = await User.find({ _id: { $ne: loggedInUserId } }).select(
@@ -14,5 +13,3 @@ const getUser = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
-module.exports = { getUser };

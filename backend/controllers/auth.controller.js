@@ -1,8 +1,8 @@
-const bcrypt = require("bcryptjs");
-const { User } = require("../models/user.model");
-const { generateTokenAndSetCookie } = require("../utils/generateToken");
+import bcrypt from "bcryptjs";
+import User from "../models/user.model.js";
+import generateTokenAndSetCookie from "../utils/generateToken.js";
 
-const signUp = async (req, res) => {
+export const signUp = async (req, res) => {
   try {
     const { fullName, username, password, confirmPassword, gender } = req.body;
     if (password !== confirmPassword) {
@@ -25,7 +25,8 @@ const signUp = async (req, res) => {
       username,
       password: hashedPassword,
       gender,
-      profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+      profilePic:
+        gender.toLowerCase() === "male" ? boyProfilePic : girlProfilePic,
     });
     if (newUser) {
       // generate JWT token here
@@ -44,7 +45,7 @@ const signUp = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-const signIn = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -63,18 +64,16 @@ const signIn = async (req, res) => {
       profilePic: user.profilePic,
     });
   } catch (error) {
-    console.log("Error in signin controller", error.message);
+    console.log("Error in login controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-const signOut = (req, res) => {
+export const logout = (req, res) => {
   try {
-    res.cookie("jwtToken", "", { maxAge: 0 });
-    res.status(200).json({ message: "Signout successfully" });
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).json({ message: "logout successfully" });
   } catch (error) {
-    console.log("Error in signout controller", error.message);
+    console.log("Error in logout controller", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-module.exports = { signUp, signIn, signOut };

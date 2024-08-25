@@ -86,7 +86,7 @@ const SignUp = () => {
             <GenderCheck></GenderCheck>
 
             <Link
-              to={"/signin"}
+              to={"/login"}
               className="text-sm hover:underline hover:text-rose-300 mt-2 inline-block"
             >
               Already have an account?

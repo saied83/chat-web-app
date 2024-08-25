@@ -1,8 +1,7 @@
-const express = require("express");
-const { Conversation } = require("../models/conversation.model");
-const { Message } = require("../models/message.model");
+import { Conversation } from "../models/conversation.model.js";
+import { Message } from "../models/message.model.js";
 
-const sendMessage = async (req, res) => {
+export const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
     const { id: receiverId } = req.params;
@@ -38,13 +37,13 @@ const sendMessage = async (req, res) => {
   }
 };
 
-const getMessage = async (req, res) => {
+export const getMessage = async (req, res) => {
   try {
-    const { id: userToSendId } = req.params;
+    const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
     const conversation = await Conversation.findOne({
-      participant: { $all: [senderId, userToSendId] },
+      participant: { $all: [senderId, receiverId] },
     }).populate("message");
 
     if (!conversation) return res.status(200).json([]);
@@ -57,4 +56,3 @@ const getMessage = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-module.exports = { sendMessage, getMessage };
