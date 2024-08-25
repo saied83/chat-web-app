@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
-const SignIn = () => {
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { loading, login } = useLogin();
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    await login({ username, password });
+  };
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div
@@ -13,7 +24,7 @@ const SignIn = () => {
           <span className="text-red-500"> ChatApp</span>
         </h1>
 
-        <form>
+        <form onSubmit={handleLoginSubmit}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
@@ -22,6 +33,10 @@ const SignIn = () => {
               type="text"
               placeholder="Enter Username"
               className="input input-bordered input-info w-full h-10 max-w-xs"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
             />
           </div>
           <div>
@@ -32,6 +47,10 @@ const SignIn = () => {
               type="password"
               placeholder="Enter Password"
               className="input input-bordered input-info w-full h-10 max-w-xs"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
           <Link
@@ -40,13 +59,20 @@ const SignIn = () => {
           >
             {"Don't"} have an account?
           </Link>
-          <div className="btn btn-block btn-sm btn-primary hover:btn-lime-300 text-white mt-3 h-10">
-            Login
-          </div>
+          <button
+            className="btn btn-block btn-sm btn-primary hover:btn-lime-300 text-white mt-3 h-10"
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              "Login"
+            )}
+          </button>
         </form>
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default Login;

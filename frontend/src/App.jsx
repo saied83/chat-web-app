@@ -1,7 +1,7 @@
 import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
-import SignIn from "./pages/signin/SignIn";
+import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import NotFound from "./pages/NotFound/NotFound";
 import { Toaster } from "react-hot-toast";
@@ -18,7 +18,7 @@ function App() {
         />
         <Route
           path="/login"
-          element={authUser ? <Navigate to="/" /> : <SignIn />}
+          element={authUser ? <Navigate to="/" /> : <Login />}
         />
         <Route
           path="/signup"
