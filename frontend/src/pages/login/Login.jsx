@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("password");
 
   const { loading, login } = useLogin();
 
@@ -33,7 +33,6 @@ const Login = () => {
               type="text"
               placeholder="Enter Username"
               className="input input-bordered input-info w-full h-10 max-w-xs"
-              defaultValue={"admin"}
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
@@ -48,7 +47,6 @@ const Login = () => {
               type="password"
               placeholder="Enter Password"
               className="input input-bordered input-info w-full h-10 max-w-xs"
-              defaultValue={"password"}
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
