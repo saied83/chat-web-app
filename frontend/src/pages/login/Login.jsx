@@ -33,6 +33,7 @@ const Login = () => {
               type="text"
               placeholder="Enter Username"
               className="input input-bordered input-info w-full h-10 max-w-xs"
+              defaultValue={"admin"}
               value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
@@ -47,6 +48,7 @@ const Login = () => {
               type="password"
               placeholder="Enter Password"
               className="input input-bordered input-info w-full h-10 max-w-xs"
+              defaultValue={"password"}
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
